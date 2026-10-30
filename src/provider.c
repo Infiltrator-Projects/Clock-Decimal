@@ -5,9 +5,6 @@
  * formatting dependency. Common supplies the ABI and validates callbacks.
  */
 #include <infiltratr/temporal_clock_resource.h>
-#include <type_traits>
-static_assert(std::is_standard_layout_v<InfiltratrTemporalClockProvider>);
-static_assert(std::is_standard_layout_v<InfiltratrTemporalResourceMetadata>);
 #include "clock-civil.h"
 #include <stdbool.h>
 #include <stdint.h>
@@ -89,11 +86,11 @@ static const InfiltratrTemporalClockProvider provider = {
 #else
 #define EXPORT __attribute__((visibility("default")))
 #endif
-extern "C" EXPORT const InfiltratrTemporalResourceMetadata *
+EXPORT const InfiltratrTemporalResourceMetadata *
 infiltratr_temporal_resource_metadata_v1(void);
-extern "C" EXPORT const InfiltratrTemporalClockProvider *
+EXPORT const InfiltratrTemporalClockProvider *
 infiltratr_temporal_clock_provider_v1(void);
-extern "C" EXPORT const InfiltratrTemporalResourceMetadata *
+EXPORT const InfiltratrTemporalResourceMetadata *
 infiltratr_temporal_resource_metadata_v1(void) { return &metadata; }
-extern "C" EXPORT const InfiltratrTemporalClockProvider *
+EXPORT const InfiltratrTemporalClockProvider *
 infiltratr_temporal_clock_provider_v1(void) { return &provider; }

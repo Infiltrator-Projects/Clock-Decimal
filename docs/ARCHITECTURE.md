@@ -30,3 +30,7 @@ The local `Makefile` builds one canonically named shared object directly from th
 The existing Common resource package continues to own the installed path. An independent installer, package handover, release workflow and published release are separate work. This source copy does not claim those steps are complete.
 
 See [provenance](../SOURCE.md), [file manifest](../SOURCE-MANIFEST.json), [model](MODEL.md) and [validation](VALIDATION.md).
+
+## Implementation language
+
+The clock provider and its arithmetic remain ISO C11: they require no C++ runtime, exception machinery or dynamic resource ownership. C exports preserve the exact Common temporal ABI. Builds link against the pinned Common gitlink (90c5b2c86afb7158e91794231ed970197aaf1e04) and must pass the native output, accuracy, package and upgrade checks before publication.
