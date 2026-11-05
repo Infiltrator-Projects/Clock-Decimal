@@ -49,5 +49,5 @@ Each package owns only this provider and its passive documentation. Its `Replace
 ## Installed two-file documentation
 
 Only this clock .so and an illustrated, nontechnical PDF are installed under
-/System/Resources/Clocks/ and /System/Resources/Documentation/Clock-Decimal/.
+/System/Resources/Clocks/ and /System/Resources/Documentation/Clock-Decimal.pdf.
 Development reports remain in GitHub; native build evidence is held by dpkg.
