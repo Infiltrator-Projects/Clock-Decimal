@@ -5,7 +5,7 @@
  * formatting dependency. Common supplies the ABI and validates callbacks.
  */
 #include <infiltratr/temporal_clock_resource.h>
-#include "clock-civil.h"
+#include <infiltratr/temporal.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -30,9 +30,7 @@ static bool clock_render(const InfiltratrTemporalClockProvider *provider,
     const char *sep = vertical ? "\n" : ":";
 
     (void)provider; (void)locale; (void)latitude; (void)longitude;
-    (void)instant; (void)offset; (void)seconds; (void)vertical;
-    (void)tick; (void)sep;
-    tick = ticks_at(clock_civil_local_phase(instant, offset),
+    tick = ticks_at((uint64_t)infiltratr_temporal_local_microseconds_of_day(instant, offset),
                     seconds ? UINT64_C(100000) : UINT64_C(1000));
     if (seconds)
         written = snprintf(text, sizeof(text), "%llu%s%02llu%s%02llu",
@@ -58,7 +56,7 @@ static bool clock_next_tick(const InfiltratrTemporalClockProvider *provider,
     (void)provider; (void)latitude; (void)longitude; (void)offset; (void)seconds;
     if (milliseconds == NULL) return false;
     units = seconds ? UINT64_C(100000) : UINT64_C(1000);
-    phase = clock_civil_local_phase(instant, offset);
+    phase = (uint64_t)infiltratr_temporal_local_microseconds_of_day(instant, offset);
     tick = ticks_at(phase, units);
     boundary = ((tick + 1U) * (uint64_t)CLOCK_MICROSECONDS_PER_DAY +
                  units - 1U) / units;
