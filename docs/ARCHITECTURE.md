@@ -2,15 +2,7 @@
 
 ## Current source ownership
 
-This repository now contains a local, independently buildable **copy** of provider `decimal`. `src/provider.c` contains the selected native ABI adapter. The other files under `src/` contain only reached supporting implementation definitions; `include/` contains the required Common ABI headers and this provider's build configuration.
-
-The original implementation, combined build and installed package remain in Common. Nothing is deleted from Common, and no current package ownership is changed.
-
-## Copied shared code
-
-Required shared helpers are copied locally, including arithmetic, date coordinates, localization or ICU bridging where this provider uses them. Multiple provider repositories intentionally contain their own copies of these helpers. Combined implementation files were selected and reduced to this provider's reachable operations and data; unrelated executable provider implementations are excluded.
-
-Public ABI declarations preserve compatibility with existing consumers. Private selector numeric values are retained where needed, while the other private selectors are removed. No other provider is registered or exported by this module.
+The initial extraction retained provider `decimal` and its reachable implementation from Common 1.19.78. That source-copy arrangement is historical. The current independent module owns its clock-specific arithmetic, formatting and callback implementation in `src/provider.c`; Common owns public ABI declarations, generic time arithmetic, checked loading and shared support. Builds compile the pinned Common static archive rather than maintain copied Common headers or helper implementations. The original Common temporal source is retained.
 
 ## Native resource contract
 
@@ -25,12 +17,10 @@ Public ABI declarations preserve compatibility with existing consumers. Private 
 
 ## Build and packaging
 
-The local `Makefile` builds one canonically named shared object directly from this repository, with hidden helper symbols and only the two versioned native entry points exported. It requires no Common checkout, Common archive, sibling resource repository or source download.
-
-The existing Common resource package continues to own the installed path. An independent installer, package handover, release workflow and published release are separate work. This source copy does not claim those steps are complete.
+The local `Makefile` builds one canonically named shared object with hidden helper symbols and two versioned native entry points. It requires the exact Common submodule specified by `COMMON_REVISION` and `COMMON_VERSION`. Independent packaging owns only this resource and its PDF, with the upgrade and release contract defined in [PACKAGING.md](PACKAGING.md).
 
 See [provenance](../SOURCE.md), [file manifest](../SOURCE-MANIFEST.json), [model](MODEL.md) and [validation](VALIDATION.md).
 
 ## Implementation language
 
-The clock provider and its arithmetic remain ISO C11: they require no C++ runtime, exception machinery or dynamic resource ownership. C exports preserve the exact Common temporal ABI. Builds link against the pinned Common gitlink (a99ef676b0e43c7e645c81756e3fd38be0a54406) and must pass the native output, accuracy, package and upgrade checks before publication.
+The clock provider and its arithmetic remain ISO C11: they require no C++ runtime, exception machinery or dynamic resource ownership. C exports preserve the exact Common temporal ABI. Builds link against the authoritative Common gitlink recorded in the current Makefile and must pass the native output, accuracy, package and upgrade checks before publication.

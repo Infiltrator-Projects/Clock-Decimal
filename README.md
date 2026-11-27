@@ -12,7 +12,7 @@ The clock owns both its notation and next-visible-tick scheduling. It does not r
 
 ## Status
 
-**Independent source, native installation and releases.** This repository contains the implementation of `decimal`, the supporting code it needs, a one-provider `Makefile` and focused regression fixtures. The copy is based on Common 1.19.78 at `8d60662114e3`; the original Common source remains unchanged.
+**Independent source, native installation and releases.** This repository contains the implementation of `decimal`, the supporting code it needs, a one-provider `Makefile` and focused regression fixtures. The initial extraction was based on Common 1.19.78 at `8d60662114e3`; current builds use the authoritative Common submodule pinned by the Makefile.
 
 Run `make` to produce `build/French Revolutionary Decimal Clock.so` and `make check` to run this provider's checks. The pinned Common submodule is required. Independent releases now provide a portable amd64 Debian package, a small hardware-native network installer; GitHub supplies the automatic tag source ZIP. The original Common source is retained.
 
@@ -52,4 +52,4 @@ Only this clock .so and an illustrated, nontechnical PDF are installed under
 /System/Resources/Clocks/ and /System/Resources/Documentation/Clock-Decimal.pdf.
 Development reports remain in GitHub; native build evidence is held by dpkg.
 
-Native release installers fetch the exact provider Git commit and its pinned Common submodule, verify both identities, and build locally. No source or binary payload is embedded in the RUN; GitHub provides its automatic source archive separately.
+The provider-specific manual source is [docs/GUIDE.json](docs/GUIDE.json). The currently pinned Common guide generator uses the README summary and scope; the revised shared renderer must be adopted before packaging uses the complete guide.
