@@ -52,4 +52,4 @@ Only this clock .so and an illustrated, nontechnical PDF are installed under
 /System/Resources/Clocks/ and /System/Resources/Documentation/Clock-Decimal.pdf.
 Development reports remain in GitHub; native build evidence is held by dpkg.
 
-The provider-specific manual source is [docs/GUIDE.json](docs/GUIDE.json). The currently pinned Common guide generator uses the README summary and scope; the revised shared renderer must be adopted before packaging uses the complete guide.
+The provider-specific manual source is [docs/GUIDE.json](docs/GUIDE.json). The pinned Common renderer generates the complete PDF from the structured guide.
